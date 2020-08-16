@@ -1,32 +1,8 @@
 import time
 import datetime
-import json
-import os
 from selenium import webdriver
-
-BASE_PATH = ''
-OS = ''
-OUTPUT_FILENAME = ''
-CHROME_DRIVER_PATH = ''
-OUTPUT_FILE_PATH = ''
-
-
-def get_config():
-    global BASE_PATH
-    global OS
-    global OUTPUT_FILENAME
-    with open('config.json', 'rt') as f:
-        json_config = json.load(f)
-        OS = json_config['os']
-        BASE_PATH = json_config['base_path'][OS]
-        OUTPUT_FILENAME = json_config['output_filename']
-
-
-def create_paths():
-    global CHROME_DRIVER_PATH
-    global OUTPUT_FILE_PATH
-    CHROME_DRIVER_PATH = os.path.join(BASE_PATH, 'chromedriver.exe')
-    OUTPUT_FILE_PATH = os.path.join(BASE_PATH, OUTPUT_FILENAME)
+from conf import (CHROME_DRIVER_PATH, OUTPUT_FILE_PATH_BROWSE)
+from core import log_duration
 
 
 def init_webdriver():
@@ -49,14 +25,6 @@ def get_chrome_opening_duration():
     return duration
 
 
-def log_duration(duration):
-    print(duration)
-    with open(OUTPUT_FILE_PATH, 'w') as f:
-        print(duration, file=f)
-
-
 if __name__ == '__main__':
-    get_config()
-    create_paths()
     duration = get_chrome_opening_duration()
-    log_duration(duration)
+    log_duration(duration, OUTPUT_FILE_PATH_BROWSE)

@@ -4,5 +4,6 @@
     "mac": "~\\Documents\\"
   },
   "os": "windows",
-  "output_filename": "browseDuration.txt"
+  "output_filename_browse": "browseDuration.txt",
+  "output_filename_download": "downloadDuration.txt"
 }
